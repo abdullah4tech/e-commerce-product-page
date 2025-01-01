@@ -38,7 +38,7 @@ import iconPlus from '@/assets/icon-plus.svg';
 
 
   <!-- Main content -->
-  <main>
+  <main class="flex gap-24 h-[550px] justify-center py-[60px]">
     <div class="w-96">
       <div>
         <img class="w-full" :src="product_1">
@@ -50,32 +50,33 @@ import iconPlus from '@/assets/icon-plus.svg';
         <img class="w-20 h-20" :src="product_4_thub">
       </div>
     </div>
-    <div class="w-96">
+    <div class="w-96 py-12">
       <div>
-        <p>SNEAKER COMPANY</p>
-        <h2>Fall Limited Edition Sneakers</h2>
-        <p>
+        <p class="text-xs tracking-[0.1rem] text-slate-700 font-semibold pb-3">SNEAKER COMPANY</p>
+        <h2 class="text-4xl font-bold text-slate-900 pb-10">Fall Limited Edition Sneakers</h2>
+        <p class="text-slate-600 font-normal text-sm">
           The low-profile sneakers are your perfect casual wear companion. Featuring a durable rubber outer sole, they'll withstand everything the weather can offer.
         </p>
       </div>
-      <div>
-        <div>
-          <div>
-            <h4>%125.00</h4>
-            <span>50%</span>
+      <div class="mt-5 flex flex-col gap-5">
+        <div class="flex flex-col gap-2">
+          <div class="flex gap-5">
+            <h4 class="text-xl font-bold text-slate-900">$125.00</h4>
+            <span class="px-2 mt-1 rounded-[5px] h-5 font-semibold flex items-center justify-center text-white text-xs text-center bg-slate-900">50%</span>
           </div>
-          <span>$250.00</span>
+          <span class="text-sm font-semibold text-slate-700 line-through line">$250.00</span>
         </div>
-        <div>
-          <div>
+        <div class="flex items-center gap-3 justify-between">
+          <div class="bg-greyis-blue w-48 flex items-center rounded-md justify-between p-2 px-3 py-3">
             <img :src="iconMinus">
-            <span>0</span>
+            <span class="text-xs font-bold">0</span>
             <img :src="iconPlus">
           </div>
-          <button class="flex gap-4">
-            <img :src="cartIcon">
-            <span>Add to cart</span>
-          </button>
+          <div class="flex w-full items-center gap-2 rounded-md justify-center bg-custom-orange p-2 py-3">
+            <img class="text-black size-4" :src="cartIcon" alt="cart icon">
+            <!-- <svg width="22" height="20" xmlns="http://www.w3.org/2000/svg"><path d="M20.925 3.641H3.863L3.61.816A.896.896 0 0 0 2.717 0H.897a.896.896 0 1 0 0 1.792h1l1.031 11.483c.073.828.52 1.726 1.291 2.336C2.83 17.385 4.099 20 6.359 20c1.875 0 3.197-1.87 2.554-3.642h4.905c-.642 1.77.677 3.642 2.555 3.642a2.72 2.72 0 0 0 2.717-2.717 2.72 2.72 0 0 0-2.717-2.717H6.365c-.681 0-1.274-.41-1.53-1.009l14.321-.842a.896.896 0 0 0 .817-.677l1.821-7.283a.897.897 0 0 0-.87-1.114ZM6.358 18.208a.926.926 0 0 1 0-1.85.926.926 0 0 1 0 1.85Zm10.015 0a.926.926 0 0 1 0-1.85.926.926 0 0 1 0 1.85Zm2.021-7.243-13.8.81-.57-6.341h15.753l-1.383 5.53Z" fill-rule="nonzero"/></svg> -->
+            <span class="text-xs font-bold">Add to cart</span>
+          </div>
         </div>
       </div>
     </div>
