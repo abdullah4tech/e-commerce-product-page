@@ -13,6 +13,7 @@ import product_4_thub from '@/assets/image-product-4-thumbnail.jpg';
 import iconMinus from '@/assets/icon-minus.svg';
 import iconPlus from '@/assets/icon-plus.svg';
 import { ref } from 'vue';
+import CartComponent from './components/CartComponent.vue';
 
 
 const thubmnails = ref([product_1_thub, product_2_thub, product_3_thub, product_4_thub])
@@ -26,9 +27,9 @@ const toggle_display_IMG = (index) => {
 </script>
 
 <template>
-
+  <CartComponent />
   <!-- Header -->
-  <header class="px-28">
+  <header class="px-40">
     <nav class="flex items-center gap-10 justify-between border-b border-gray-300 pb-8 py-6">
       <div class="flex items-center gap-14">
         <img :src="logo" alt="header logo">
@@ -66,7 +67,7 @@ const toggle_display_IMG = (index) => {
         >
           <img
             :class="{'opacity-40': selectedIndex === index}"
-            class="w-full h-full rounded-lg object-cover hover:opacity-70 cursor-pointer"
+            class="w-full h-full object-cover hover:opacity-70 cursor-pointer"
             :src="i"
             style="object-fit: cover; border-radius: inherit;"
           />
@@ -76,7 +77,7 @@ const toggle_display_IMG = (index) => {
     <div class="w-96 py-12">
       <div>
         <p class="text-xs tracking-[0.1rem] text-slate-700 font-semibold pb-2">SNEAKER COMPANY</p>
-        <h2 class="text-3xl font-bold text-slate-900 pb-8">Fall Limited Edition Sneakers</h2>
+        <h2 class="text-4xl font-bold text-slate-900 pb-8">Fall Limited Edition Sneakers</h2>
         <p class="text-slate-600 font-normal text-sm">
           The low-profile sneakers are your perfect casual wear companion. Featuring a durable rubber outer sole, they'll withstand everything the weather can offer.
         </p>
