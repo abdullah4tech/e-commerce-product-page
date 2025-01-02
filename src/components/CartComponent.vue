@@ -5,8 +5,8 @@
     <div class="border-b py-4 pl-6">
       <span class="text-sm font-semibold">Cart</span>
     </div>
-    <div class="flex items-center justify-center">
-      <p>Your cart is empty</p>
+    <div class="flex h-40 items-center justify-center">
+      <p class="text-sm font-semibold text-slate-700">Your cart is empty</p>
     </div>
   </div>
 </template>
