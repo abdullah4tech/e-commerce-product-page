@@ -69,7 +69,7 @@ const toggle_display_IMG = (index) => {
             class="w-full h-full rounded-lg object-cover hover:opacity-70 cursor-pointer"
             :src="i"
           />
-        </div>
+        </div> 
       </div>
     </div>
     <div class="w-96 py-12">
