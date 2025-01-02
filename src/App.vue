@@ -21,7 +21,7 @@ import iconPlus from '@/assets/icon-plus.svg';
     <nav class="flex items-center gap-10 justify-between border-b border-gray-300 pb-8 py-6">
       <div class="flex items-center gap-14">
         <img :src="logo" alt="header logo">
-        <ul class="flex items-center gap-8 text-sm text-gray-600">
+        <ul class="flex items-center gap-8 text-sm font-medium text-gray-600">
           <li>Collections</li>
           <li>Men</li>
           <li>Women</li>
@@ -44,10 +44,18 @@ import iconPlus from '@/assets/icon-plus.svg';
         <img class="w-full rounded-2xl" :src="product_1">
       </div>
       <div class="flex justify-between">
-        <img class="w-20 h-20 rounded-md" :src="product_1_thub">
-        <img class="w-20 h-20 rounded-md" :src="product_2_thub">
-        <img class="w-20 h-20 rounded-md" :src="product_3_thub">
-        <img class="w-20 h-20 rounded-md" :src="product_4_thub">
+        <div class="border-2 border-custom-orange hover:border-opacity-70 w-20 h-20 rounded-md overflow-hidden">
+          <img class="w-full h-full object-cover opacity-40 hover:opacity-70 cursor-pointer" :src="product_1_thub">
+        </div>
+        <div class="w-20 h-20 rounded-md overflow-hidden">
+          <img class="w-full h-full object-cover hover:opacity-70 cursor-pointer" :src="product_2_thub">
+        </div>
+        <div class="w-20 h-20 rounded-md overflow-hidden">
+          <img class="w-full h-full object-cover hover:opacity-70 cursor-pointer" :src="product_3_thub">
+        </div>
+        <div class="w-20 h-20 rounded-md overflow-hidden">
+          <img class="w-full h-full object-cover hover:opacity-70 cursor-pointer" :src="product_4_thub">
+        </div>
       </div>
     </div>
     <div class="w-96 py-12">
@@ -68,11 +76,11 @@ import iconPlus from '@/assets/icon-plus.svg';
         </div>
         <div class="flex items-center gap-3 justify-between">
           <div class="bg-greyis-blue w-48 flex items-center rounded-md justify-between p-2 px-3 py-3">
-            <img :src="iconMinus">
+            <img class="hover:opacity-70 cursor-pointer" :src="iconMinus">
             <span class="text-xs font-bold">0</span>
-            <img :src="iconPlus">
+            <img class="hover:opacity-70 cursor-pointer" :src="iconPlus">
           </div>
-          <div class="flex w-full items-center gap-2 rounded-md justify-center bg-custom-orange p-2 py-3">
+          <div class="flex w-full items-center gap-2 rounded-md cursor-pointer justify-center hover:opacity-70 select-none bg-custom-orange p-2 py-3">
             <img class="text-black size-4" :src="cartIcon" alt="cart icon">
             <!-- <svg width="22" height="20" xmlns="http://www.w3.org/2000/svg"><path d="M20.925 3.641H3.863L3.61.816A.896.896 0 0 0 2.717 0H.897a.896.896 0 1 0 0 1.792h1l1.031 11.483c.073.828.52 1.726 1.291 2.336C2.83 17.385 4.099 20 6.359 20c1.875 0 3.197-1.87 2.554-3.642h4.905c-.642 1.77.677 3.642 2.555 3.642a2.72 2.72 0 0 0 2.717-2.717 2.72 2.72 0 0 0-2.717-2.717H6.365c-.681 0-1.274-.41-1.53-1.009l14.321-.842a.896.896 0 0 0 .817-.677l1.821-7.283a.897.897 0 0 0-.87-1.114ZM6.358 18.208a.926.926 0 0 1 0-1.85.926.926 0 0 1 0 1.85Zm10.015 0a.926.926 0 0 1 0-1.85.926.926 0 0 1 0 1.85Zm2.021-7.243-13.8.81-.57-6.341h15.753l-1.383 5.53Z" fill-rule="nonzero"/></svg> -->
             <span class="text-xs font-bold">Add to cart</span>
