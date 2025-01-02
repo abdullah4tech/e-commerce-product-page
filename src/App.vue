@@ -38,22 +38,22 @@ import iconPlus from '@/assets/icon-plus.svg';
 
 
   <!-- Main content -->
-  <main class="flex gap-24 h-[550px] justify-center py-[60px]">
-    <div class="w-96">
+  <main class="flex gap-24 h-[550px] justify-center py-[40px]">
+    <div class="w-96 flex flex-col gap-5">
       <div>
-        <img class="w-full" :src="product_1">
+        <img class="w-full rounded-2xl" :src="product_1">
       </div>
-      <div class="flex">
-        <img class="w-20 h-20" :src="product_1_thub">
-        <img class="w-20 h-20" :src="product_2_thub">
-        <img class="w-20 h-20" :src="product_3_thub">
-        <img class="w-20 h-20" :src="product_4_thub">
+      <div class="flex justify-between">
+        <img class="w-20 h-20 rounded-md" :src="product_1_thub">
+        <img class="w-20 h-20 rounded-md" :src="product_2_thub">
+        <img class="w-20 h-20 rounded-md" :src="product_3_thub">
+        <img class="w-20 h-20 rounded-md" :src="product_4_thub">
       </div>
     </div>
     <div class="w-96 py-12">
       <div>
-        <p class="text-xs tracking-[0.1rem] text-slate-700 font-semibold pb-3">SNEAKER COMPANY</p>
-        <h2 class="text-4xl font-bold text-slate-900 pb-10">Fall Limited Edition Sneakers</h2>
+        <p class="text-xs tracking-[0.1rem] text-slate-700 font-semibold pb-2">SNEAKER COMPANY</p>
+        <h2 class="text-3xl font-bold text-slate-900 pb-8">Fall Limited Edition Sneakers</h2>
         <p class="text-slate-600 font-normal text-sm">
           The low-profile sneakers are your perfect casual wear companion. Featuring a durable rubber outer sole, they'll withstand everything the weather can offer.
         </p>
