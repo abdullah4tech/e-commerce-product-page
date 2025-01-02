@@ -14,10 +14,14 @@ import iconMinus from '@/assets/icon-minus.svg';
 import iconPlus from '@/assets/icon-plus.svg';
 import { ref } from 'vue';
 
-const isToggle = ref(false)
 
-const toggle_display_IMG = () => {
-  isToggle.value = !isToggle.value
+const thubmnails = ref([product_1_thub, product_2_thub, product_3_thub, product_4_thub])
+
+const selectedIndex = ref(null)
+
+// Toggle function to select the clicked image
+const toggle_display_IMG = (index) => {
+  selectedIndex.value = selectedIndex.value === index ? null : index
 }
 </script>
 
@@ -52,19 +56,19 @@ const toggle_display_IMG = () => {
       </div>
       <div class="flex justify-between">
         <div
-          @click="toggle_display_IMG"
-          :class="(isToggle === true ? 'border-2 hover:border-opacity-70 w-20 h-20 rounded-lg overflow-hidden border-custom-orange' : 'hover:border-opacity-70 w-20 h-20 rounded-lg overflow-hidden')"
+          v-for="(i, index) in thubmnails"
+          :key="index"
+          @click="toggle_display_IMG(index)"
+          :class="{
+            'border-2 hover:border-opacity-70 w-20 h-20 rounded-lg overflow-hidden border-custom-orange': selectedIndex === index,
+            'hover:border-opacity-70 w-20 h-20 rounded-lg overflow-hidden': selectedIndex !== index
+          }"
         >
-          <img :class="{'opacity-40': isToggle === true}" class="w-full h-full rounded-lg object-cover hover:opacity-70 cursor-pointer" :src="product_1_thub">
-        </div>
-        <div class="w-20 h-20 rounded-md overflow-hidden">
-          <img class="w-full h-full object-cover hover:opacity-70 cursor-pointer" :src="product_2_thub">
-        </div>
-        <div class="w-20 h-20 rounded-md overflow-hidden">
-          <img class="w-full h-full object-cover hover:opacity-70 cursor-pointer" :src="product_3_thub">
-        </div>
-        <div class="w-20 h-20 rounded-md overflow-hidden">
-          <img class="w-full h-full object-cover hover:opacity-70 cursor-pointer" :src="product_4_thub">
+          <img
+            :class="{'opacity-40': selectedIndex === index}"
+            class="w-full h-full rounded-lg object-cover hover:opacity-70 cursor-pointer"
+            :src="i"
+          />
         </div>
       </div>
     </div>
