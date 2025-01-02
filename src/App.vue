@@ -68,8 +68,9 @@ const toggle_display_IMG = (index) => {
             :class="{'opacity-40': selectedIndex === index}"
             class="w-full h-full rounded-lg object-cover hover:opacity-70 cursor-pointer"
             :src="i"
+            style="object-fit: cover; border-radius: inherit;"
           />
-        </div> 
+        </div>
       </div>
     </div>
     <div class="w-96 py-12">
