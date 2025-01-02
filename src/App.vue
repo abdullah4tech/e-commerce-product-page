@@ -12,6 +12,13 @@ import product_3_thub from '@/assets/image-product-3-thumbnail.jpg';
 import product_4_thub from '@/assets/image-product-4-thumbnail.jpg';
 import iconMinus from '@/assets/icon-minus.svg';
 import iconPlus from '@/assets/icon-plus.svg';
+import { ref } from 'vue';
+
+const isToggle = ref(false)
+
+const toggle_display_IMG = () => {
+  isToggle.value = !isToggle.value
+}
 </script>
 
 <template>
@@ -44,8 +51,11 @@ import iconPlus from '@/assets/icon-plus.svg';
         <img class="w-full rounded-2xl" :src="product_1">
       </div>
       <div class="flex justify-between">
-        <div class="border-2 border-custom-orange hover:border-opacity-70 w-20 h-20 rounded-md overflow-hidden">
-          <img class="w-full h-full object-cover opacity-40 hover:opacity-70 cursor-pointer" :src="product_1_thub">
+        <div
+          @click="toggle_display_IMG"
+          :class="(isToggle === true ? 'border-2 hover:border-opacity-70 w-20 h-20 rounded-lg overflow-hidden border-custom-orange' : 'hover:border-opacity-70 w-20 h-20 rounded-lg overflow-hidden')"
+        >
+          <img :class="{'opacity-40': isToggle === true}" class="w-full h-full rounded-lg object-cover hover:opacity-70 cursor-pointer" :src="product_1_thub">
         </div>
         <div class="w-20 h-20 rounded-md overflow-hidden">
           <img class="w-full h-full object-cover hover:opacity-70 cursor-pointer" :src="product_2_thub">
