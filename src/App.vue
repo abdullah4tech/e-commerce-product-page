@@ -19,9 +19,10 @@ import iconMenuClose from '@/assets/icon-close.svg'
 import iconPrevious from '@/assets/icon-previous.svg';
 import iconNext from '@/assets/icon-next.svg';
 
-const thubmnails = ref([product_1_thub, product_2_thub, product_3_thub, product_4_thub])
+const thubmnails = ref<object>([product_1_thub, product_2_thub, product_3_thub, product_4_thub])
 
 const selectedIndex = ref(null)
+const toggleCart = ref<boolean>(false)
 
 // Toggle function to select the clicked image
 const toggle_display_IMG = (index) => {
@@ -30,7 +31,7 @@ const toggle_display_IMG = (index) => {
 </script>
 
 <template>
-  <CartComponent />
+  <CartComponent :toggle="toggleCart" />
 
   <!-- Sidebar -->
   <div class="md:hidden hidden w-full h-full fixed bg-gray-800 bg-opacity-50 z-50">
@@ -57,20 +58,21 @@ const toggle_display_IMG = (index) => {
         </div>
 
         <!-- Navigation links (hidden on mobile) -->
-        <ul class="hidden md:flex md:items-center md:gap-8 md:text-sm md:font-medium md:text-gray-600">
-          <li>Collections</li>
-          <li>Men</li>
-          <li>Women</li>
-          <li>About</li>
-          <li>Contact</li>
+        <ul class="hidden md:flex md:items-center  md:gap-8 cursor-pointer md:text-sm md:font-medium md:text-gray-600">
+          <li class="hover:text-black">Collections</li>
+          <li class="hover:text-black">Men</li>
+          <li class="hover:text-black">Women</li>
+          <li class="hover:text-black">About</li>
+          <li class="hover:text-black">Contact</li>
         </ul>
       </div>
 
 
       <!-- Cart and Avatar -->
       <div class="flex items-center gap-4 md:gap-10">
-        <img class="h-6 w-6 md:h-auto md:w-auto" :src="cartIcon" alt="cart icon">
-        <img class="h-8 w-8 md:h-11 md:w-11 rounded-full" :src="imageAvatar" alt="avatar">
+        <p class="absolute top-7 bg-custom-orange flex items-center justify-center text-white p-2 rounded-full w-5 h-2 right-[235px] font-bold jami">2</p>
+        <svg width="22" @click="toggleCart = !toggleCart" class="h-6 w-6 text-black cursor-pointer md:h-auto md:w-auto" height="20" xmlns="http://www.w3.org/2000/svg"><path d="M20.925 3.641H3.863L3.61.816A.896.896 0 0 0 2.717 0H.897a.896.896 0 1 0 0 1.792h1l1.031 11.483c.073.828.52 1.726 1.291 2.336C2.83 17.385 4.099 20 6.359 20c1.875 0 3.197-1.87 2.554-3.642h4.905c-.642 1.77.677 3.642 2.555 3.642a2.72 2.72 0 0 0 2.717-2.717 2.72 2.72 0 0 0-2.717-2.717H6.365c-.681 0-1.274-.41-1.53-1.009l14.321-.842a.896.896 0 0 0 .817-.677l1.821-7.283a.897.897 0 0 0-.87-1.114ZM6.358 18.208a.926.926 0 0 1 0-1.85.926.926 0 0 1 0 1.85Zm10.015 0a.926.926 0 0 1 0-1.85.926.926 0 0 1 0 1.85Zm2.021-7.243-13.8.81-.57-6.341h15.753l-1.383 5.53Z" :fill="toggleCart ? '#000000' : '#69707D'" fill-rule="nonzero"/></svg>
+        <img class="h-8 w-8 md:h-11 border-2 border-white hover:border-custom-orange md:w-11 rounded-full" :src="imageAvatar" alt="avatar">
       </div>
     </nav>
   </header>
@@ -147,6 +149,10 @@ const toggle_display_IMG = (index) => {
 <style scoped>
 dd {
   border-width: 20px;
+}
+
+.jami {
+  font-size: 10px;
 }
 </style>
 
