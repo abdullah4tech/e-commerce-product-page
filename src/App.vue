@@ -46,8 +46,6 @@ const nextImage = () => {
   selectedIndex.value = (selectedIndex.value + 1) % images.length;
 };
 
-
-
 </script>
 
 <template>
