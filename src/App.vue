@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { ref, computed } from 'vue';
 import logo from '@/assets/logo.svg';
 import cartIcon from '@/assets/icon-cart.svg';
 import imageAvatar from '@/assets/image-avatar.png';
@@ -12,7 +13,6 @@ import product_3_thub from '@/assets/image-product-3-thumbnail.jpg';
 import product_4_thub from '@/assets/image-product-4-thumbnail.jpg';
 import iconMinus from '@/assets/icon-minus.svg';
 import iconPlus from '@/assets/icon-plus.svg';
-import { ref, computed } from 'vue';
 import CartComponent from '@/components/CartComponent.vue';
 import iconMenuOpen from '@/assets/icon-menu.svg';
 import iconMenuClose from '@/assets/icon-close.svg'
@@ -25,6 +25,7 @@ const thubmnails = [product_1_thub, product_2_thub, product_3_thub, product_4_th
 const selectedIndex = ref(0)
 const toggleCart = ref<boolean>(false)
 const openMenu = ref<boolean>(false)
+const price = ref<number>(125.00)
 const cartVal = ref(0)
 
 // Computed property for the current image
@@ -44,10 +45,13 @@ const prevImage = () => {
 const nextImage = () => {
   selectedIndex.value = (selectedIndex.value + 1) % images.length;
 };
+
+
+
 </script>
 
 <template>
-  <CartComponent :toggle="toggleCart" />
+  <CartComponent :toggle="toggleCart" :price="price" :quantity="cartVal" />
 
   <!-- Sidebar -->
   <div :class="{'md:hidden hidden w-full h-full fixed bg-gray-800 bg-opacity-50 z-50': !openMenu, 'md:hidden w-full h-full fixed bg-gray-800 bg-opacity-50 z-50': openMenu}">
@@ -148,7 +152,7 @@ const nextImage = () => {
       <div class="mt-5 flex flex-col gap-5">
         <div class="flex md:flex-col justify-between gap-2">
           <div class="flex gap-5">
-            <h4 class="md:text-xl text-2xl font-bold text-slate-900">$125.00</h4>
+            <h4 class="md:text-xl text-2xl font-bold text-slate-900">${{ price.toFixed(2) }}</h4>
             <span class="px-2 md:mt-1 mt-2 rounded-[5px] h-5 font-semibold flex items-center justify-center text-white md:text-xs text-sm text-center bg-slate-900">50%</span>
           </div>
           <span class="md:text-sm text-base font-semibold text-slate-700 line-through line">$250.00</span>

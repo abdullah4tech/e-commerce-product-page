@@ -1,7 +1,14 @@
 <script setup lang="ts">
+import product_1 from '@/assets/image-product-1.jpg';
+import deleteIcon from '@/assets/icon-delete.svg';
+
 defineProps<{
-  toggle: boolean
+  toggle: boolean,
+  price: number,
+  quantity: number
 }>()
+
+
 </script>
 
 <template>
@@ -10,8 +17,24 @@ defineProps<{
       <div class="border-b py-4 pl-6">
         <span class="text-sm font-semibold">Cart</span>
       </div>
-      <div class="flex h-40 items-center justify-center">
+      <div v-show="quantity === 0" class="flex h-40 items-center justify-center">
         <p class="text-sm font-semibold text-slate-700">Your cart is empty</p>
+      </div>
+      <div v-show="quantity >= 1">
+        <div class="pt-5 flex items-center gap-5 justify-center">
+          <!-- Cart items will be rendered here -->
+          <div class="flex gap-5 items-center">
+            <img class="rounded-md w-14" :src="product_1">
+            <div class="flex flex-col gap-1 font-medium text-sm text-slate-500">
+              <p>Fall Limited Edition Sneakers</p>
+              <p>${{ price.toFixed(2) }} x {{ quantity }} <span class="font-bold text-black">${{ (price * quantity).toFixed(2) }}</span></p>
+            </div>
+          </div>
+          <img :src="deleteIcon">
+        </div>
+        <div class="flex justify-end gap-4 py-4 pb-8 px-6">
+          <button class="text-sm font-medium w-full h-14 text-white bg-custom-orange shadow-2xl shadow-pale-orange rounded-md px-4 py-2 active:scale-90">Checkout</button>
+        </div>
       </div>
     </div>
   </Transition>
