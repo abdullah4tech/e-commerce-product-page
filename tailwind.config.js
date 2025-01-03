@@ -13,6 +13,9 @@ export default {
       },
       borderColor: {
         "custom-orange": "hsl(26, 100%, 55%)",
+      },
+      boxShadowColor: {
+        "pale-orange": "hsl(25, 100%, 94%)",
       }
     },
   },
