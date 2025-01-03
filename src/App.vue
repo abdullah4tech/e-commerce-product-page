@@ -33,7 +33,7 @@ const currentImage = computed(() => images[selectedIndex.value]);
 
 
 // Toggle function to select the clicked image
-const toggle_display_IMG = (index) => {
+const toggle_display_IMG = (index: number) => {
   selectedIndex.value = selectedIndex.value === index ? 0 : index
 }
 
