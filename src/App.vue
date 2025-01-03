@@ -12,39 +12,57 @@ import product_3_thub from '@/assets/image-product-3-thumbnail.jpg';
 import product_4_thub from '@/assets/image-product-4-thumbnail.jpg';
 import iconMinus from '@/assets/icon-minus.svg';
 import iconPlus from '@/assets/icon-plus.svg';
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
 import CartComponent from '@/components/CartComponent.vue';
 import iconMenuOpen from '@/assets/icon-menu.svg';
 import iconMenuClose from '@/assets/icon-close.svg'
 import iconPrevious from '@/assets/icon-previous.svg';
 import iconNext from '@/assets/icon-next.svg';
 
-const thubmnails = ref<object>([product_1_thub, product_2_thub, product_3_thub, product_4_thub])
+const images = [product_1, product_2, product_3, product_4];
+const thubmnails = [product_1_thub, product_2_thub, product_3_thub, product_4_thub]
 
-const selectedIndex = ref(null)
+const selectedIndex = ref(0)
 const toggleCart = ref<boolean>(false)
+const openMenu = ref<boolean>(false)
+const cartVal = ref(0)
+
+// Computed property for the current image
+const currentImage = computed(() => images[selectedIndex.value]);
+
 
 // Toggle function to select the clicked image
 const toggle_display_IMG = (index) => {
-  selectedIndex.value = selectedIndex.value === index ? null : index
+  selectedIndex.value = selectedIndex.value === index ? 0 : index
 }
+
+// Methods to navigate images
+const prevImage = () => {
+  selectedIndex.value = (selectedIndex.value - 1 + images.length) % images.length;
+};
+
+const nextImage = () => {
+  selectedIndex.value = (selectedIndex.value + 1) % images.length;
+};
 </script>
 
 <template>
   <CartComponent :toggle="toggleCart" />
 
   <!-- Sidebar -->
-  <div class="md:hidden hidden w-full h-full fixed bg-gray-800 bg-opacity-50 z-50">
-    <div class="h-screen w-64 bg-white">
-      <img class="p-4 pt-10 pl-8" :src="iconMenuClose" >
-      <ul class="flex flex-col gap-5 font-semibold p-5 pl-8">
-          <li>Collections</li>
-          <li>Men</li>
-          <li>Women</li>
-          <li>About</li>
-          <li>Contact</li>
-        </ul>
-    </div>
+  <div :class="{'md:hidden hidden w-full h-full fixed bg-gray-800 bg-opacity-50 z-50': !openMenu, 'md:hidden w-full h-full fixed bg-gray-800 bg-opacity-50 z-50': openMenu}">
+    <Transition name="slide-in" mode="in-out">
+      <div v-show="openMenu" class="h-full w-64 bg-white">
+        <img class="p-4 pt-10 pl-8" :src="iconMenuClose" >
+        <ul class="flex flex-col gap-5 font-semibold p-5 pl-8">
+            <li>Collections</li>
+            <li>Men</li>
+            <li>Women</li>
+            <li>About</li>
+            <li>Contact</li>
+          </ul>
+      </div>
+    </Transition>
   </div>
 
   <!-- Header -->
@@ -53,7 +71,7 @@ const toggle_display_IMG = (index) => {
       <!-- Logo -->
       <div class="flex gap-14">
         <div class="flex items-center gap-4">
-          <img class="w-5 md:hidden" :src="iconMenuOpen">
+          <img @click="openMenu = !openMenu" class="w-5 md:hidden" :src="openMenu ? iconMenuClose : iconMenuOpen">
           <img :src="logo" alt="header logo">
         </div>
 
@@ -70,7 +88,7 @@ const toggle_display_IMG = (index) => {
 
       <!-- Cart and Avatar -->
       <div class="flex items-center gap-4 md:gap-10">
-        <p class="absolute top-7 bg-custom-orange flex items-center justify-center text-white p-2 rounded-full w-5 h-2 right-[235px] font-bold jami">2</p>
+        <p :class="{'hidden': cartVal === 0}" class="absolute top-3 right-14 md:top-7 bg-custom-orange flex items-center justify-center text-white p-2 rounded-full w-5 h-2 md:right-[235px] font-bold jami">{{ cartVal }}</p>
         <svg width="22" @click="toggleCart = !toggleCart" class="h-6 w-6 text-black cursor-pointer md:h-auto md:w-auto" height="20" xmlns="http://www.w3.org/2000/svg"><path d="M20.925 3.641H3.863L3.61.816A.896.896 0 0 0 2.717 0H.897a.896.896 0 1 0 0 1.792h1l1.031 11.483c.073.828.52 1.726 1.291 2.336C2.83 17.385 4.099 20 6.359 20c1.875 0 3.197-1.87 2.554-3.642h4.905c-.642 1.77.677 3.642 2.555 3.642a2.72 2.72 0 0 0 2.717-2.717 2.72 2.72 0 0 0-2.717-2.717H6.365c-.681 0-1.274-.41-1.53-1.009l14.321-.842a.896.896 0 0 0 .817-.677l1.821-7.283a.897.897 0 0 0-.87-1.114ZM6.358 18.208a.926.926 0 0 1 0-1.85.926.926 0 0 1 0 1.85Zm10.015 0a.926.926 0 0 1 0-1.85.926.926 0 0 1 0 1.85Zm2.021-7.243-13.8.81-.57-6.341h15.753l-1.383 5.53Z" :fill="toggleCart ? '#000000' : '#69707D'" fill-rule="nonzero"/></svg>
         <img class="h-8 w-8 md:h-11 border-2 border-white hover:border-custom-orange md:w-11 rounded-full" :src="imageAvatar" alt="avatar">
       </div>
@@ -83,16 +101,22 @@ const toggle_display_IMG = (index) => {
   <main class="flex md:flex-row pt-[360px] md:pt-12 flex-col gap-8 md:gap-24 h-[550px] md:mb-0 mb-96 justify-center py-[40px]">
     <div class="w-96 flex flex-col gap-5">
       <div class="md:hidden absolute top-56 flex left-5 items-center gap-[258px]">
-        <div class="w-[45px] h-[45px] bg-white border rounded-full flex items-center justify-center">
+        <button @click="prevImage" class="w-[45px] h-[45px] bg-white border rounded-full flex items-center justify-center">
           <img class="w-3 h-3" :src="iconPrevious" alt="icon">
-        </div>
+        </button>
 
-        <div class="w-[45px] h-[45px] bg-white border rounded-full flex items-center justify-center">
+        <button @click="nextImage" class="w-[45px] h-[45px] bg-white border rounded-full flex items-center justify-center">
           <img class="w-3 h-3" :src="iconNext" alt="icon">
-        </div>
+        </button>
       </div>
       <div>
-        <img class="w-full md:rounded-2xl" :src="product_1">
+        <Transition name="fade" mode="out-in">
+          <img
+            class="w-full md:rounded-2xl"
+            :key="currentImage"
+            :src="currentImage"
+          />
+        </Transition>
       </div>
       <div class="hidden md:flex md:justify-between">
         <div
@@ -131,9 +155,9 @@ const toggle_display_IMG = (index) => {
         </div>
         <div class="flex md:flex-row flex-col items-center gap-3 justify-between">
           <div class="bg-greyis-blue md:w-48 w-full flex items-center rounded-md justify-between p-5 md:p-2 md:px-3 md:py-3">
-            <img class="hover:opacity-70 cursor-pointer" :src="iconMinus">
-            <span class="md:text-xs text-base font-bold">0</span>
-            <img class="hover:opacity-70 cursor-pointer" :src="iconPlus">
+            <img @click="cartVal <= 0 ? cartVal = 0 : cartVal--" class="hover:opacity-70 cursor-pointer" :src="iconMinus">
+            <span class="md:text-xs text-base font-bold">{{ cartVal }}</span>
+            <img @click="cartVal++" class="hover:opacity-70 cursor-pointer" :src="iconPlus">
           </div>
           <div class="flex w-full items-center gap-2 rounded-md cursor-pointer justify-center hover:opacity-70 select-none bg-custom-orange shadow-2xl shadow-pale-orange p-5 md:p-2 md:py-3">
             <img class="text-black size-4" :src="cartIcon" alt="cart icon">
@@ -153,6 +177,45 @@ dd {
 
 .jami {
   font-size: 10px;
+}
+
+/* Define the transition styles for the slide-in animation */
+.slide-in-enter-active, .slide-in-leave-active {
+  transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+}
+
+/* Starting state for entering */
+.slide-in-enter-from {
+  transform: translateX(-100%);
+  opacity: 0;
+}
+
+/* End state for entering */
+.slide-in-enter-to {
+  transform: translateX(0);
+  opacity: 1;
+}
+
+/* Starting state for leaving */
+.slide-in-leave-from {
+  transform: translateX(0);
+  opacity: 1;
+}
+
+/* End state for leaving */
+.slide-in-leave-to {
+  transform: translateX(-100%);
+  opacity: 0;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.2s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
 }
 </style>
 
