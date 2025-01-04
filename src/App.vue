@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue';
+import { ref, computed, onMounted } from 'vue';
 import logo from '@/assets/logo.svg';
 import cartIcon from '@/assets/icon-cart.svg';
 import imageAvatar from '@/assets/image-avatar.png';
@@ -28,14 +28,24 @@ const openMenu = ref<boolean>(false)
 const price = ref<number>(125.00)
 const cartVal = ref(0)
 
+// Preload images on mount
+onMounted(() => {
+  images.forEach((image) => {
+    const img = new Image();
+    img.src = image;
+  });
+});
+
 // Computed property for the current image
 const currentImage = computed(() => images[selectedIndex.value]);
 
 
 // Toggle function to select the clicked image
 const toggle_display_IMG = (index: number) => {
-  selectedIndex.value = selectedIndex.value === index ? 0 : index
-}
+  if (index >= 0 && index < images.length) {
+    selectedIndex.value = index;
+  }
+};
 
 // Methods to navigate images
 const prevImage = () => {
@@ -45,6 +55,7 @@ const prevImage = () => {
 const nextImage = () => {
   selectedIndex.value = (selectedIndex.value + 1) % images.length;
 };
+
 
 </script>
 
@@ -103,11 +114,11 @@ const nextImage = () => {
   <main class="flex md:flex-row pt-[360px] md:pt-12 flex-col gap-8 md:gap-24 h-[550px] md:mb-0 mb-96 justify-center py-[40px]">
     <div class="w-96 flex flex-col gap-5">
       <div class="md:hidden absolute top-56 flex left-5 items-center gap-[258px]">
-        <button @click="prevImage" class="w-[45px] h-[45px] bg-white border rounded-full flex items-center justify-center">
+        <button @click.prevent="prevImage" class="w-[45px] h-[45px] bg-white border rounded-full flex items-center justify-center">
           <img class="w-3 h-3" :src="iconPrevious" alt="icon">
         </button>
 
-        <button @click="nextImage" class="w-[45px] h-[45px] bg-white border rounded-full flex items-center justify-center">
+        <button @click.prevent="nextImage" class="w-[45px] h-[45px] bg-white border rounded-full flex items-center justify-center">
           <img class="w-3 h-3" :src="iconNext" alt="icon">
         </button>
       </div>
@@ -117,6 +128,7 @@ const nextImage = () => {
             class="w-full md:rounded-2xl"
             :key="currentImage"
             :src="currentImage"
+            alt="Product image"
           />
         </Transition>
       </div>
@@ -124,7 +136,7 @@ const nextImage = () => {
         <div
           v-for="(i, index) in thubmnails"
           :key="index"
-          @click="toggle_display_IMG(index)"
+          @click.prevent="toggle_display_IMG(index)"
           :class="{
             'border-2 hover:border-opacity-70 w-20 h-20 rounded-lg overflow-hidden border-custom-orange': selectedIndex === index,
             'hover:border-opacity-70 w-20 h-20 rounded-lg overflow-hidden': selectedIndex !== index
