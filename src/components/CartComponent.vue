@@ -2,11 +2,15 @@
 import product_1 from '@/assets/image-product-1.jpg';
 import deleteIcon from '@/assets/icon-delete.svg';
 
-defineProps<{
+const props = defineProps<{
   toggle: boolean,
-  price: number,
-  quantity: number
+  payloads: {
+    product_name: string,
+    quantity: number,
+    amount: number
+  }
 }>()
+
 
 
 </script>
@@ -17,17 +21,17 @@ defineProps<{
       <div class="border-b py-4 pl-6">
         <span class="text-sm font-semibold">Cart</span>
       </div>
-      <div v-show="quantity === 0" class="flex h-40 items-center justify-center">
+      <div v-show="payloads.quantity === 0" class="flex h-40 items-center justify-center">
         <p class="text-sm font-semibold text-slate-700">Your cart is empty</p>
       </div>
-      <div v-show="quantity >= 1">
+      <div v-show="payloads.quantity >= 1">
         <div class="pt-5 flex items-center gap-5 justify-center">
           <!-- Cart items will be rendered here -->
           <div class="flex gap-5 items-center">
             <img class="rounded-md w-14" :src="product_1">
             <div class="flex flex-col gap-1 font-medium text-sm text-slate-500">
-              <p>Fall Limited Edition Sneakers</p>
-              <p>${{ price.toFixed(2) }} x {{ quantity }} <span class="font-bold text-black">${{ (price * quantity).toFixed(2) }}</span></p>
+              <p>{{ payloads.product_name }}</p>
+              <p>${{ payloads.amount.toFixed(2) }} x {{ payloads.quantity }} <span class="font-bold text-black">${{ (payloads.amount * payloads.quantity).toFixed(2) }}</span></p>
             </div>
           </div>
           <img :src="deleteIcon">
